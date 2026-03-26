@@ -249,7 +249,7 @@ export default function DijkstraVisualizer() {
                 }
             }
         } else if (algorithm === 'BFS') {
-            const queue = [startNode];
+            const queue: Cell[] = [startNode];
             startNode.isVisited = true;
             while(queue.length > 0) {
                 const current = queue.shift()!;
@@ -258,7 +258,7 @@ export default function DijkstraVisualizer() {
                 if (current === endNode) break;
 
                 const neighbors = getNeighbors(current, grid);
-                for (let neighbor of neighbors) {
+                for (const neighbor of neighbors) {
                     if (!neighbor.isVisited) {
                         neighbor.isVisited = true;
                         neighbor.previousNode = current;
@@ -267,7 +267,7 @@ export default function DijkstraVisualizer() {
                 }
             }
         } else if (algorithm === 'DFS') {
-            const stack = [startNode];
+            const stack: Cell[] = [startNode];
             while(stack.length > 0) {
                 const current = stack.pop()!;
                 if (current.isWall) continue;
@@ -278,7 +278,7 @@ export default function DijkstraVisualizer() {
                     if (current === endNode) break;
                     
                     const neighbors = getNeighbors(current, grid);
-                    for (let neighbor of neighbors) {
+                    for (const neighbor of neighbors) {
                         if (!neighbor.isVisited && !neighbor.isWall) {
                             neighbor.previousNode = current;
                             stack.push(neighbor);
@@ -287,7 +287,7 @@ export default function DijkstraVisualizer() {
                 }
             }
         } else if (algorithm === 'Bellman-Ford') {
-            const queue = [startNode];
+            const queue: Cell[] = [startNode];
             const inQueue = Array(ROWS).fill(false).map(() => Array(COLS).fill(false));
             inQueue[startNode.row][startNode.col] = true;
 
@@ -302,7 +302,7 @@ export default function DijkstraVisualizer() {
                 }
 
                 const neighbors = getNeighbors(current, grid);
-                for (let neighbor of neighbors) {
+                for (const neighbor of neighbors) {
                     if (current.distance + 1 < neighbor.distance) {
                         neighbor.distance = current.distance + 1;
                         neighbor.previousNode = current;
@@ -485,9 +485,9 @@ export default function DijkstraVisualizer() {
                         <div>
                             <h1 className="text-2xl font-bold text-zinc-100 tracking-wider flex items-center gap-3">
                                 {algorithm.toUpperCase()}
-                                <select 
-                                    value={algorithm} 
-                                    onChange={(e) => setAlgorithm(e.target.value as any)}
+                                <select
+                                    value={algorithm}
+                                    onChange={(e) => setAlgorithm(e.target.value as 'Dijkstra' | 'BFS' | 'DFS' | 'Bellman-Ford')}
                                     disabled={state.isRunning}
                                     className="ml-2 text-sm bg-zinc-800 text-white border border-zinc-700 rounded px-2 py-1 outline-none font-sans font-normal"
                                 >
@@ -737,8 +737,8 @@ export default function DijkstraVisualizer() {
                             <section>
                                 <h3 className="text-white font-semibold mb-2 text-base">Interactive Grid</h3>
                                 <ul className="list-disc pl-5 space-y-2 opacity-90">
-                                    <li><strong>Start &amp; Target:</strong> Click "START" or "TARGET" mode, then click on any cell in the grid to place them.</li>
-                                    <li><strong>Walls:</strong> Click "WALLS" mode. You can click to toggle individual walls, or click and drag across the grid to draw large barriers.</li>
+                                    <li><strong>Start &amp; Target:</strong> Click &quot;START&quot; or &quot;TARGET&quot; mode, then click on any cell in the grid to place them.</li>
+                                    <li><strong>Walls:</strong> Click &quot;WALLS&quot; mode. You can click to toggle individual walls, or click and drag across the grid to draw large barriers.</li>
                                     <li>The grid represents a 2D graph where each cell is connected to its non-diagonal neighbors.</li>
                                 </ul>
                             </section>
@@ -747,7 +747,7 @@ export default function DijkstraVisualizer() {
                                 <h3 className="text-white font-semibold mb-2 text-base">Algorithms</h3>
                                 <div className="space-y-3 opacity-90">
                                     <div className="bg-zinc-800/50 p-3 rounded border border-zinc-800">
-                                        <p className="text-white font-medium mb-1">Dijkstra's Algorithm</p>
+                                        <p className="text-white font-medium mb-1">Dijkstra&apos;s Algorithm</p>
                                         <p>Guarantees the shortest path by exploring all possible paths systematically radiating outwards.</p>
                                     </div>
                                     <div className="bg-zinc-800/50 p-3 rounded border border-zinc-800">

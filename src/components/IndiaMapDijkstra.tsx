@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import 'leaflet/dist/leaflet.css';
 import { MapContainer, TileLayer, Marker, Polyline, CircleMarker, useMap, useMapEvent } from 'react-leaflet';
 import L, { LatLngExpression, LatLngLiteral, LeafletMouseEvent } from 'leaflet';
@@ -185,7 +185,7 @@ export default function IndiaMapDijkstra() {
                                 <span>🌐</span> Dijkstra in the Real World
                             </h3>
                             <p className="text-sm opacity-90 leading-relaxed text-gray-300">
-                                This map uses OSRM (Open Source Routing Machine), which computes shortest paths on real-world road networks based on distance/time weights. The underlying concept demonstrates how Dijkstra's Algorithm scales to conquer massive, complex graphs like earthly road systems globally!
+                                This map uses OSRM (Open Source Routing Machine), which computes shortest paths on real-world road networks based on distance/time weights. The underlying concept demonstrates how Dijkstra&apos;s Algorithm scales to conquer massive, complex graphs like earthly road systems globally!
                             </p>
                         </div>
                     </div>
